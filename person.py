@@ -1,5 +1,5 @@
 import random
-# TODO: Import the virus clase
+from virus import Virus
 
 class Person(object):
     '''
@@ -46,7 +46,7 @@ class Person(object):
         # TODO:  Finish this method. Follow the instructions in the class documentation
         # for resolve_infection.  If person dies, set is_alive to False and return False.
         # If person lives, set is_vaccinated = True, infected = None, return True.
-        mortality_rate = random.randint(0.0,1.0)
+        mortality_rate = random.uniform(0,1)
         if mortality_rate > self.infected.mortality_rate:
             self.is_vaccinated = True
             self.infected = None
