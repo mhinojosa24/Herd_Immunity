@@ -125,7 +125,9 @@ class Simulation(object):
         #     - The entire population is dead.
         #     - There are no infected people left in the population.
         # In all other instances, the simulation should continue.
-        pass
+        if self.current_infected == 0:
+            return False
+        return True
 
     def run(self):
         # TODO: Finish this method.  This method should run the simulation until
@@ -161,7 +163,29 @@ class Simulation(object):
             #           - Else:
             #               - Call simulation.interaction(person, random_person)
             #               - Increment interaction counter by 1.
-            pass
+            current_person_index = 0
+
+            for person in self.population:
+                if person.infected != None:
+                    random_person_index = 0
+                    number_of_interactions = 0
+                    people_interacted = list()
+                    looking_for_person = True
+
+                    while looking_for_person:
+                        new_person = random.randint(0, self.population_size - 1)
+                        if new_person != current_person_index & new_person in people_interacted:
+                            random_person_index = new_person
+                            people_interacted.append(new_person)
+                            looking_for_person = False
+
+
+                    while number_of_interactions != 100:
+                        random_person = self.population[random_person_index]
+                        if person.is_alive:
+                            self.interaction(person, random_person)
+                            number_of_interactions += 1
+
 
     def interaction(self, person, random_person):
         # TODO: Finish this method! This method should be called any time two living
