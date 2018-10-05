@@ -199,9 +199,14 @@ class Simulation(object):
             #     Simulation object's newly_infected array, so that their .infected
             #     attribute can be changed to True at the end of the time step.
         # TODO: Remember to call self.logger.log_interaction() during this method!
-        
 
-        pass
+        if random_person.is_vaccinated and random.infected != None:
+            print('nothing happens')
+
+        if not random_person.is_vaccinated:
+            random_number = random.uniform(0,1)
+            if self.basic_repro_num > random_number:
+                self.newly_infected.append(random_person._id)
 
     def _infect_newly_infected(self):
         # TODO: Finish this method! This method should be called at the end of
