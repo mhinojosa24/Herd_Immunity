@@ -45,6 +45,7 @@ class Logger(object):
         # TODO:  Finish this initialization method.  The file_name passed should be the
         # full file name of the file that the logs will be written to.
         self.file_name = file_name
+        self.log_file = open(self.file_name, "w")
 
     def write_metadata(self, pop_size, vacc_percentage, virus_name, mortality_rate,
                        basic_repro_num):
@@ -58,7 +59,7 @@ class Logger(object):
         # since 'w' overwrites the file.
         # NOTE: Make sure to end every line with a '/n' character to ensure that each
         # event logged ends up on a separate line!
-        pass
+        self.log_file.append('Population Size: {} \t Vaccination Percentage: {} \t Virus Name: {} \t Mortality Rate: {} \t Basic Reproduction Number: {}/n'.format(pop_size, vacc_percentage, virus_name, mortality_rate, basic_repro_num))
 
     def log_interaction(self, person1, person2, did_infect=None,
                         person2_vacc=None, person2_sick=None):
