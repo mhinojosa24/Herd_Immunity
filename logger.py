@@ -95,7 +95,10 @@ class Logger(object):
         # on the format of the log.
         # NOTE: Make sure to end every line with a '/n' character to ensure that each
         # event logged ends up on a separate line!
-        pass
+        if did_die_from_infection:
+            self.log_file.append("Person #{} - Living Status: DEAD/n".format(person._id))
+        else:
+            self.log_file.append("Person #{} - Living Status: ALIVE/n".format(person._id))
 
     def log_time_step(self, time_step_number):
         # TODO: Finish this method.  This method should log when a time step ends, and a
@@ -106,4 +109,5 @@ class Logger(object):
         # to compute these statistics for you, as a Logger's job is just to write logs!
         # NOTE: Make sure to end every line with a '/n' character to ensure that each
         # event logged ends up on a separate line!
-        pass
+        self.log_file.append("Time Step #{} just ended./n".format(time_step_number))
+        self.log_file.append("Time Step #{} is about to begin./n".format(time_step_number + 1))

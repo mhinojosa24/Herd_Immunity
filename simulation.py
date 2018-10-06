@@ -159,6 +159,7 @@ class Simulation(object):
         # to rebind should_continue to another call of self._simulation_should_continue()!
             self.time_step()
             time_step_counter += 1
+            self.logger.log_time_step(time_step_counter)
             should_continue = self._simulation_should_continue()
         print('The simulation has ended after {} turns.'.format(time_step_counter))
 
@@ -190,9 +191,8 @@ class Simulation(object):
                         people_interacted.append(random_person_index)
                         number_of_interactions += 1
 
+
         self._infect_newly_infected()
-
-
 
     def interaction(self, person, random_person):
         # TODO: Finish this method! This method should be called any time two living
