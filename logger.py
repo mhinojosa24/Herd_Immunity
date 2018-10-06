@@ -1,3 +1,4 @@
+from person import Person
 class Logger(object):
     '''
     Utility class responsible for logging all interactions of note during the
@@ -74,7 +75,17 @@ class Logger(object):
         # all the possible edge cases!
         # NOTE: Make sure to end every line with a '/n' character to ensure that each
         # event logged ends up on a separate line!
-        pass
+        self.log_file.append('INTERACTIONS BEGIN! /n/n')
+        self.log_file.append('----Infected Person - ID# {} | Healthy Person - ID# {}----/n'.format(person1._id, person2._id))
+        self.log_file.append('- Person #{}: Infected: {}, Vaccinated: {}, Sick: {}/n'.format(did_infect, person2person2_vacc, person2_sick))
+        if did_infect:
+            self.log_file.append('Person #{} infected Person #{}/n'.format(person1._id, person2._id))
+        elif did_infect == None:
+            self.log_file.append('Person #{} failed to infect Person #{}/n'.format(person1._id, person2._id))
+            self.log_file.append('Person #{} is now Vaccinated/n'.format(person2._id))
+        self.log_file.append('----Infected Person - ID# {} | Healthy Person - ID# {}----')
+        self.log_file.append('----------------------------------------------------------/n/n/n')
+
 
     def log_infection_survival(self, person, did_die_from_infection):
         # TODO: Finish this method.  The Simulation object should use this method to log
