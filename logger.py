@@ -46,7 +46,7 @@ class Logger(object):
         # TODO:  Finish this initialization method.  The file_name passed should be the
         # full file name of the file that the logs will be written to.
         self.file_name = file_name
-        self.log_file = open(self.file_name, "w")
+        self.log_file = open(file_name, "w")
 
     def write_metadata(self, pop_size, vacc_percentage, virus_name, mortality_rate,
                        basic_repro_num):
@@ -60,7 +60,7 @@ class Logger(object):
         # since 'w' overwrites the file.
         # NOTE: Make sure to end every line with a '/n' character to ensure that each
         # event logged ends up on a separate line!
-        self.log_file.append('Population Size: {} \t Vaccination Percentage: {} \t Virus Name: {} \t Mortality Rate: {} \t Basic Reproduction Number: {}/n'.format(pop_size, vacc_percentage, virus_name, mortality_rate, basic_repro_num))
+        self.log_file.write('Population Size: {} \t Vaccination Percentage: {} \t Virus Name: {} \t Mortality Rate: {} \t Basic Reproduction Number: {}\n'.format(pop_size, vacc_percentage, virus_name, mortality_rate, basic_repro_num))
 
     def log_interaction(self, person1, person2, did_infect=None,
                         person2_vacc=None, person2_sick=None):
@@ -75,16 +75,16 @@ class Logger(object):
         # all the possible edge cases!
         # NOTE: Make sure to end every line with a '/n' character to ensure that each
         # event logged ends up on a separate line!
-        self.log_file.append('INTERACTIONS BEGIN! /n/n')
-        self.log_file.append('----Infected Person - ID# {} | Healthy Person - ID# {}----/n'.format(person1._id, person2._id))
+        self.log_file.append('INTERACTIONS BEGIN! \n\n')
+        self.log_file.append('----Infected Person - ID# {} | Healthy Person - ID# {}----\n'.format(person1._id, person2._id))
         self.log_file.append('- Person #{}: Infected: {}, Vaccinated: {}, Sick: {}/n'.format(did_infect, person2person2_vacc, person2_sick))
         if did_infect:
-            self.log_file.append('Person #{} infected Person #{}/n'.format(person1._id, person2._id))
+            self.log_file.append('Person #{} infected Person #{}\n'.format(person1._id, person2._id))
         elif did_infect == None:
-            self.log_file.append('Person #{} failed to infect Person #{}/n'.format(person1._id, person2._id))
-            self.log_file.append('Person #{} is now Vaccinated/n'.format(person2._id))
+            self.log_file.append('Person #{} failed to infect Person #{}\n'.format(person1._id, person2._id))
+            self.log_file.append('Person #{} is now Vaccinated\n'.format(person2._id))
         self.log_file.append('----Infected Person - ID# {} | Healthy Person - ID# {}----')
-        self.log_file.append('----------------------------------------------------------/n/n/n')
+        self.log_file.append('----------------------------------------------------------\n\n\n')
 
 
     def log_infection_survival(self, person, did_die_from_infection):
@@ -96,9 +96,9 @@ class Logger(object):
         # NOTE: Make sure to end every line with a '/n' character to ensure that each
         # event logged ends up on a separate line!
         if did_die_from_infection:
-            self.log_file.append("Person #{} - Living Status: DEAD/n".format(person._id))
+            self.log_file.append("Person #{} - Living Status: DEAD\n".format(person._id))
         else:
-            self.log_file.append("Person #{} - Living Status: ALIVE/n".format(person._id))
+            self.log_file.append("Person #{} - Living Status: ALIVE\n".format(person._id))
 
     def log_time_step(self, time_step_number):
         # TODO: Finish this method.  This method should log when a time step ends, and a
@@ -109,5 +109,5 @@ class Logger(object):
         # to compute these statistics for you, as a Logger's job is just to write logs!
         # NOTE: Make sure to end every line with a '/n' character to ensure that each
         # event logged ends up on a separate line!
-        self.log_file.append("Time Step #{} just ended./n".format(time_step_number))
-        self.log_file.append("Time Step #{} is about to begin./n".format(time_step_number + 1))
+        self.log_file.append("Time Step #{} just ended.\n".format(time_step_number))
+        self.log_file.append("Time Step #{} is about to begin.\n".format(time_step_number + 1))
