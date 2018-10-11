@@ -75,16 +75,15 @@ class Logger(object):
         # all the possible edge cases!
         # NOTE: Make sure to end every line with a '/n' character to ensure that each
         # event logged ends up on a separate line!
-        self.log_file.append('INTERACTIONS BEGIN! \n\n')
-        self.log_file.append('----Infected Person - ID# {} | Healthy Person - ID# {}----\n'.format(person1._id, person2._id))
-        self.log_file.append('- Person #{}: Infected: {}, Vaccinated: {}, Sick: {}/n'.format(did_infect, person2person2_vacc, person2_sick))
+        self.log_file.write('INTERACTIONS BEGIN! \n\n')
+        self.log_file.write('----Infected Person - ID# {} | Healthy Person - ID# {}----\n'.format(person1._id, person2._id))
+        # self.log_file.write('- Person #{}: Infected: {}, Vaccinated: {}, Sick: {}/n'.format(person1._id))
         if did_infect:
-            self.log_file.append('Person #{} infected Person #{}\n'.format(person1._id, person2._id))
-        elif did_infect == None:
-            self.log_file.append('Person #{} failed to infect Person #{}\n'.format(person1._id, person2._id))
-            self.log_file.append('Person #{} is now Vaccinated\n'.format(person2._id))
-        self.log_file.append('----Infected Person - ID# {} | Healthy Person - ID# {}----')
-        self.log_file.append('----------------------------------------------------------\n\n\n')
+            self.log_file.write('Person #{} infected Person #{}\n'.format(person1._id, person2._id))
+        elif did_infect == False:
+            self.log_file.write('Person #{} failed to infect Person #{}\n'.format(person1._id, person2._id))
+            self.log_file.write('Person #{} is now Vaccinated\n'.format(person2._id))
+        self.log_file.write('----------------------------------------------------------\n\n\n')
 
 
     def log_infection_survival(self, person, did_die_from_infection):
@@ -96,9 +95,9 @@ class Logger(object):
         # NOTE: Make sure to end every line with a '/n' character to ensure that each
         # event logged ends up on a separate line!
         if did_die_from_infection:
-            self.log_file.append("Person #{} - Living Status: DEAD\n".format(person._id))
+            self.log_file.write("Person #{} - Living Status: DEAD\n".format(person._id))
         else:
-            self.log_file.append("Person #{} - Living Status: ALIVE\n".format(person._id))
+            self.log_file.write("Person #{} - Living Status: ALIVE\n".format(person._id))
 
     def log_time_step(self, time_step_number):
         # TODO: Finish this method.  This method should log when a time step ends, and a
@@ -109,5 +108,8 @@ class Logger(object):
         # to compute these statistics for you, as a Logger's job is just to write logs!
         # NOTE: Make sure to end every line with a '/n' character to ensure that each
         # event logged ends up on a separate line!
-        self.log_file.append("Time Step #{} just ended.\n".format(time_step_number))
-        self.log_file.append("Time Step #{} is about to begin.\n".format(time_step_number + 1))
+        if time_step_number == 1:
+            self.log_file.write('The First Time Step Has Began!\n')
+        else:
+            self.log_file.write("Time Step #{} is about to begin.\n".format(time_step_number))
+        self.log_file.write("Time Step #{} just ended.\n".format(time_step_number))
